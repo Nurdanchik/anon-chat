@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Posts: | {% endblock %}
+
+{% block content %}
+<div class="p-10 lg:p-20 text-center bg-red-600">
+    <h1 class="text-3xl lg:text-6xl text-white">АнонЧат</h1>
+</div>
+
+<div class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-lg">
+    <div class="flex justify-end mb-5">
+        <a href="{% url 'create_post' %}" class="px-5 py-3 rounded-xl text-white bg-red-600 hover:bg-red-700">Создать пост</a>
+    </div>
+
+    <h2 class="text-2xl font-semibold mb-5">Latest Posts</h2>
+    
+    {% for post in posts %}
+        <div class="mb-6">
+            <img src="{{ post.image.url }}" alt="{{ post.name }}" class="w-full h-auto rounded-lg">
+            <h3 class="text-xl font-semibold mt-3">{{ post.name }}</h3>
+            <p class="text-gray-600">{{ post.description }}</p>
+        </div>
+    {% endfor %}
+
+    {% if posts.count == 0 %}
+        <p class="text-gray-600">No posts available.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Create Post | {% endblock %}
+
+{% block content %}
+<style>
+    /* Add this style to make input fields red */
+    .container input[type="text"],
+    .container input[type="file"],
+    .container textarea {
+        border: 1px solid #e53e3e; /* Red border color */
+        padding: 8px; /* Adjust as needed */
+    }
+</style>
+
+<div class="p-10 lg:p-20 text-center bg-red-600">
+    <h1 class="text-3xl lg:text-6xl text-white">Create Post</h1>
+</div>
+
+<div class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-lg">
+    <form method="post" action="{% url 'create_post' %}" enctype="multipart/form-data" class="lg:w-1/2 mx-auto">
+        {% csrf_token %}
+        
+        <div class="mb-5">
+            <label for="id_name" class="block text-gray-600">Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="mb-5">
+            <label for="id_image" class="block text-gray-600">Image</label>
+            {{ form.image }}
+        </div>
+
+        <div class="mb-5">
+            <label for="id_description" class="block text-gray-600">Description</label>
+            {{ form.description }}
+        </div>
+
+        <button type="submit" class="px-5 py-3 rounded-xl text-white bg-red-600 hover:bg-red-700">Create Post</button>
+    </form>
+</div>
+{% endblock %}
