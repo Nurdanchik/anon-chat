@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Filled Requests{% endblock %}
+
+{% block content %}
+<div class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold mb-5">Filled Requests:</h2>
+
+    {% if filled_requests %}
+        {% for request in filled_requests %}
+            <div class="mb-8 border-b-2 pb-4">
+                <h3 class="text-xl font-semibold mb-2">{{ request.title }}</h3>
+                <p class="text-gray-600"><strong>Номер телефона:</strong> {{ request.phone_number }}</p>
+                <p class="text-gray-600"><strong>Имя Фамилия:</strong> {{ request.userinfo }}</p>
+                <p class="text-gray-600"><strong>Какой продукт:</strong> {{ request.item.name }}</p>
+                <p class="text-gray-600"><strong>Сообщение:</strong> {{ request.message }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-600">No filled requests available.</p>
+    {% endif %}
+</div>
+{% endblock %}

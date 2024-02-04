@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/rooms/'
+LOGIN_REDIRECT_URL = '/frontpage/'
 LOGIN_URL = '/login/'
 
 
@@ -42,9 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'channels',
     'core',
-    'room',
 ]
 
 MIDDLEWARE = [

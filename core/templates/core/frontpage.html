@@ -4,26 +4,36 @@
 
 {% block content %}
 <div class="p-10 lg:p-20 text-center bg-red-600">
-    <h1 class="text-3xl lg:text-6xl text-white">АнонЧат</h1>
+    <h1 class="text-3xl lg:text-6xl text-white">АнонШоп</h1>
 </div>
 
 <div class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-lg">
     <div class="flex justify-end mb-5">
-        <a href="{% url 'create_post' %}" class="px-5 py-3 rounded-xl text-white bg-red-600 hover:bg-red-700">Создать пост</a>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'create_post' %}" class="px-5 py-3 rounded-xl text-white bg-red-600 hover:bg-red-700">Создать продукт</a>
+        </div>
+        <div class="flex justify-end mb-5">
+        <a href="{% url 'requestpage' %}" class="px-5 py-3 rounded-xl text-white bg-red-600 hover:bg-red-700">Список заявок</a>
+        {% endif %}
     </div>
 
-    <h2 class="text-2xl font-semibold mb-5">Latest Posts</h2>
+    <h2 class="text-2xl font-semibold mb-5">Последние продукты:</h2>
     
     {% for post in posts %}
         <div class="mb-6">
             <img src="{{ post.image.url }}" alt="{{ post.name }}" class="w-full h-auto rounded-lg">
             <h3 class="text-xl font-semibold mt-3">{{ post.name }}</h3>
             <p class="text-gray-600">{{ post.description }}</p>
+            
+            <!-- Use an anchor tag to link to the create_request page -->
+            <a href="{% url 'create_request' %}" class="inline-block px-6 py-3 mt-3 rounded-md text-white bg-red-500 hover:bg-red-600">
+                Купить
+            </a>
         </div>
     {% endfor %}
 
     {% if posts.count == 0 %}
-        <p class="text-gray-600">No posts available.</p>
+        <p class="text-gray-600">Nothing is available.</p>
     {% endif %}
 </div>
 {% endblock %}

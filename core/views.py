@@ -1,8 +1,8 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Post
-from .forms import SignUpForm,PostForm
+from .models import Post, Request
+from .forms import SignUpForm,PostForm, RequestForm
 
 def signup(request):
     if request.method == 'POST':
@@ -36,3 +36,23 @@ def create_post(request):
         form = PostForm()
     
     return render(request, 'core/create_post.html', {'form': form})
+
+
+@login_required
+def requestpage(request):
+    filled_requests = Request.objects.all()
+    return render(request, 'core/requestpage.html', {'filled_requests': filled_requests})
+
+
+@login_required
+def create_request(request):
+    if request.method == 'POST':
+        form = RequestForm(request.POST)
+
+        if form.is_valid():
+            post = form.save()
+            return redirect('frontpage')
+    else:
+        form = RequestForm()
+    
+    return render(request, 'core/buy.html', {'form': form})
