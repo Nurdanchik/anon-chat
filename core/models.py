@@ -6,6 +6,9 @@ class Post(models.Model):
     name = models.CharField(max_length=255,blank=False)
     description = models.TextField(blank=False, null=False)
 
+    def __str__(self):
+        return self.name
+
 class Request(models.Model):
     title = models.CharField(blank=True, max_length=255)
     phone_number = models.IntegerField(blank=True)
